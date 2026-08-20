@@ -50,6 +50,15 @@ Open http://127.0.0.1:7799, then edit `demo/src/pricing.js` and break the
 discount math (add the discount instead of subtracting it). Watch Kane catch the
 wrong total and the agent fix it.
 
+## Commands
+
+- `npm run loop` runs the watcher, the self-heal, and the dashboard on :7799
+- `npm run verify` replays the committed flows once (what the pre-push hook runs)
+- `npm run suite` runs the tagged `_test.md` set as one sealed evidence pack
+- `npm run export:code` exports a flow as standalone Playwright (Python)
+- `npm run skill` installs the Kane skill so your coding agent can call Kane
+- `npm run hook:install` installs the pre-push verification hook
+
 <!-- MORE -->
 
 ## How the pieces fit
@@ -83,6 +92,8 @@ kane-loop leans on Kane's whole surface, not just one command:
 | `run --agent` (NDJSON, `run_end`) | the live verification inside the loop |
 | `store as` to `final_state` | the agent reads the value Kane actually observed |
 | `testmd run` (committable `_test.md`, cached replay) | the committed regression suite, free to replay after the first run |
+| `testrun run --tags` (M tests, one sealed evidence pack) | `npm run suite` gates a whole tagged set at once |
+| `npx @testmuai/kane-cli-skill` | `npm run skill` lets Claude Code or Cursor call Kane directly |
 | `context ingest` + `extract` + `design tests` | the PRD-to-tests assurance pipeline in `.context/` |
 | `.evidence` packs + `evidence serve` | the failure evidence the agent fixes from, openable from the tape |
 | `--headless`, exit codes, `--mode`, `--variables` | headless CI runs and parameterized flows |

@@ -8,6 +8,7 @@ import { spawn } from "node:child_process";
 export function runKaneFlow(flow, opts = {}) {
   const { timeout = 150, maxSteps = 12 } = opts;
   const args = ["run", flow.objective, "--agent", "--headless", "--timeout", String(timeout), "--max-steps", String(maxSteps)];
+  if (flow.variables) args.push("--variables", JSON.stringify(flow.variables));
   return spawnKane(flow.name, args);
 }
 

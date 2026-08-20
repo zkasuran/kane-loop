@@ -24,7 +24,9 @@ export default {
       name: "checkout-total",
       url: "http://127.0.0.1:5178",
       objective:
-        "Go to http://127.0.0.1:5178, set the Quantity field to 2, type SAVE25 into the Promo code field, click Apply, store the shown Total as 'total', and assert the Total shows $66.00"
+        "Go to http://127.0.0.1:5178, set the Quantity field to 2, type {{promo}} into the Promo code field, click Apply, store the shown Total as 'total', and assert the Total shows $66.00",
+      // Kane substitutes {{promo}} from here. Mark secrets with secret: true.
+      variables: { promo: { value: "SAVE25" } }
     }
   ],
 
