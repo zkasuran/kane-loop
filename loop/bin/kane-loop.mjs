@@ -42,9 +42,15 @@ if (cmd === "watch") {
   bus.on("event", printer);
   console.log(`kane-loop: watching ${cfg.demoDir}`);
   await startLoop(cfg);
+} else if (cmd === "verify") {
+  const cfg = await loadConfig();
+  const { verifyOnce } = await import("../src/verify.mjs");
+  const ok = await verifyOnce(cfg);
+  console.log(ok ? "all flows passed" : "flows failed");
+  process.exit(ok ? 0 : 1);
 } else if (cmd === "--version" || cmd === "-v") {
   console.log("kane-loop 0.1.0");
 } else {
-  console.log("usage: kane-loop watch");
+  console.log("usage: kane-loop <watch|verify>");
   process.exit(1);
 }

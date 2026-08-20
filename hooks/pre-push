@@ -1,0 +1,11 @@
+#!/bin/sh
+# kane-loop pre-push hook: verify the app in a real browser before it ships.
+# Install with: npm run hook:install
+echo "kane-loop: verifying flows in a real browser before push..."
+node loop/bin/kane-loop.mjs verify
+if [ $? -ne 0 ]; then
+  echo "push blocked: a Kane flow failed. Run 'npm run loop' to fix it, or push --no-verify to override."
+  exit 1
+fi
+echo "kane-loop: all flows green, pushing."
+exit 0
