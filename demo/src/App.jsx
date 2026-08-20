@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { priceOrder, money, UNIT_PRICE } from "./pricing.js";
 
 const PRODUCT = {
@@ -12,10 +12,24 @@ export default function App() {
   const [applied, setApplied] = useState(null);
   const [placed, setPlaced] = useState(false);
 
+  // Web-scene contract for the demo video: reveal summary rows one at a time by
+  // opacity (never display, so nothing reflows). No-op for normal visitors.
+  useEffect(() => {
+    window.setReveal = (k, scope) => {
+      const root = scope ? document.querySelector(scope) : document;
+      root.querySelectorAll("[data-step]").forEach((el, i) => {
+        el.style.transition = "opacity .25s ease";
+        el.style.opacity = i < k ? "1" : "0";
+      });
+    };
+  }, []);
+
+  const normalizedCode = code.trim().toUpperCase();
   const price = priceOrder(qty, applied);
+  const isApplied = Boolean(price.promo && normalizedCode === applied);
 
   const apply = () => {
-    setApplied(code.trim().toUpperCase() || null);
+    setApplied(normalizedCode || null);
     setPlaced(false);
   };
 
@@ -37,7 +51,7 @@ export default function App() {
         />
       </section>
 
-      <section className="card summary">
+      <section id="summary" className="card summary" aria-label="Order summary">
         <h2>Order summary</h2>
         <div className="promo">
           <input
@@ -47,17 +61,19 @@ export default function App() {
             value={code}
             onChange={(e) => setCode(e.target.value)}
           />
-          <button type="button" onClick={apply}>Apply</button>
+          <button type="button" onClick={apply} disabled={isApplied}>
+            {isApplied ? "Applied" : "Apply"}
+          </button>
         </div>
         {price.promo && (
           <div className="chip" role="status">{price.promo.label} applied, saved {money(price.discount)}</div>
         )}
 
         <dl className="lines">
-          <div><dt>Subtotal</dt><dd>{money(price.subtotal)}</dd></div>
-          <div><dt>Discount</dt><dd>-{money(price.discount)}</dd></div>
-          <div><dt>Tax</dt><dd>{money(price.tax)}</dd></div>
-          <div className="grand"><dt>Total</dt><dd><output id="total">{money(price.total)}</output></dd></div>
+          <div data-step><dt>Subtotal</dt><dd>{money(price.subtotal)}</dd></div>
+          <div data-step><dt>Discount</dt><dd>-{money(price.discount)}</dd></div>
+          <div data-step><dt>Tax</dt><dd>{money(price.tax)}</dd></div>
+          <div data-step className="grand"><dt>Total</dt><dd><output id="total" aria-label="Total" aria-live="polite">{money(price.total)}</output></dd></div>
         </dl>
 
         <button className="pay" type="button" onClick={() => setPlaced(true)}>Complete purchase</button>

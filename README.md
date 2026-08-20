@@ -4,6 +4,8 @@
 
 Built for the Kane CLI Online Hackathon (TestMu AI), 19 to 21 Aug 2026.
 
+**Landing page:** https://kane-loop.pages.dev/ (the why and the how).
+
 **Live demo:** https://kane-loop-demo.pages.dev/ (the checkout app kane-loop
 verifies). Run the whole self-healing loop locally with `npm install` then
 `npm run loop`.

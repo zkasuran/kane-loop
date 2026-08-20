@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>kane-loop — your agent and Kane, verified green</title>
+<meta name="description" content="A self-healing dev loop: your coding agent and Kane CLI talk on every save until the app is verified green in a real browser." />
+<style>
+  :root{
+    --green:#d8f9cf; --azure:#9ccfff; --ink:#0e1726; --soft:#51617a;
+    --accent:#0c7662; --accent2:#1d63b8; --card:#ffffffee; --line:#e4ecf1;
+    --mint:#bef4d0; --good:#0ca30c; --red:#d03b3b;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  body{
+    font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1100px 600px at 12% -8%, #eafff0, transparent),
+      radial-gradient(1000px 620px at 92% 4%, #dcefff, transparent),
+      linear-gradient(135deg, var(--green), var(--azure));
+    background-attachment:fixed;
+    min-height:100vh;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  a{color:var(--accent2);text-decoration:none}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px}
+  .btn.primary{background:var(--accent);color:#fff}
+  .btn.ghost{background:#ffffffcc;color:var(--ink);border:1px solid var(--line)}
+  .btn:hover{filter:brightness(1.05)}
+  header.hero{padding:76px 0 40px;text-align:center}
+  .badge{display:inline-block;padding:6px 14px;border-radius:999px;background:#ffffffcc;border:1px solid var(--line);
+    font-size:13px;font-weight:600;color:var(--accent);margin-bottom:22px}
+  h1{font-size:46px;line-height:1.08;letter-spacing:-0.03em;max-width:16ch;margin:0 auto 16px}
+  h1 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:19px;color:var(--soft);max-width:56ch;margin:0 auto 26px}
+  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  section{padding:34px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 28px;
+    box-shadow:0 30px 70px -40px rgba(14,23,38,.5);backdrop-filter:blur(6px)}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:12px}
+  h3{font-size:26px;letter-spacing:-0.02em;margin-bottom:10px}
+  p.big{font-size:18px;color:var(--ink)}
+  .muted{color:var(--soft)}
+  .loop{display:grid;grid-template-columns:1fr;gap:12px;margin-top:8px}
+  .step{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;background:#f7fbfa;border:1px solid var(--line)}
+  .step .n{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;background:var(--accent)}
+  .step.fail .n{background:var(--red)} .step.good .n{background:var(--good)}
+  .step b{font-size:16px} .step span{color:var(--soft);font-size:14px}
+  .suite{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:6px}
+  .feat{padding:16px 18px;border-radius:14px;background:#f7fbfa;border:1px solid var(--line)}
+  .feat code{font-size:13px;color:var(--accent);background:#eafaf4;padding:2px 7px;border-radius:6px}
+  .feat p{font-size:14px;color:var(--soft);margin-top:6px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:6px}
+  .stat{padding:16px;border-radius:14px;background:#f7fbfa;border:1px solid var(--line);text-align:center}
+  .stat b{display:block;font-size:28px;letter-spacing:-.02em;color:var(--accent)} .stat span{font-size:13px;color:var(--soft)}
+  .foot{padding:40px 0 64px;text-align:center;color:var(--soft);font-size:14px}
+  .foot code{color:var(--ink)}
+  [data-step]{opacity:1;transition:opacity .3s ease}
+  @media(max-width:640px){h1{font-size:34px}header.hero{padding:52px 0 30px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="badge">Kane CLI Online Hackathon · TestMu AI</div>
+  <h1>Your agent and Kane, talking until the app is <span class="grad">verified green</span>.</h1>
+  <p class="lede">kane-loop watches your code. On every save it runs your Kane CLI flows in a real browser, and when one fails it hands the failure to your agent, which patches the code. The app heals itself until Kane is green, with no human in the middle.</p>
+  <div class="cta">
+    <a class="btn primary" href="https://kane-loop-demo.pages.dev/">Open the live checkout demo</a>
+    <a class="btn ghost" href="https://github.com/zkasuran/kane-loop">View the source</a>
+  </div>
+</div></header>
+
+<section id="why"><div class="wrap"><div class="card">
+  <h2>Why this exists</h2>
+  <h3>The loop that never closed</h3>
+  <p class="big">AI agents write code fast. Features ship from a prompt. But one part of the loop stayed manual: when the agent ships something, a human still opens a browser and clicks through to see if it actually works.</p>
+  <p class="muted" style="margin-top:12px">That is the bottleneck now. Not writing the code, trusting it. kane-loop closes it.</p>
+</div></div></section>
+
+<section id="loop"><div class="wrap"><div class="card">
+  <h2>How it works</h2>
+  <h3>Save. Verify. Heal. Green.</h3>
+  <div class="loop">
+    <div class="step" data-step><div class="n">1</div><div><b>You save</b><br><span>A file changes and kane-loop notices.</span></div></div>
+    <div class="step fail" data-step><div class="n">2</div><div><b>Kane runs it in a real browser</b><br><span>Your plain-English flow runs headless. The total is wrong, so Kane fails the run.</span></div></div>
+    <div class="step" data-step><div class="n">3</div><div><b>The agent reads the failure</b><br><span>The reason and the value Kane observed go to your coding agent, which edits the code.</span></div></div>
+    <div class="step good" data-step><div class="n">4</div><div><b>Green</b><br><span>The save re-fires Kane. It passes. No human in the middle.</span></div></div>
+  </div>
+</div></div></section>
+
+<section id="suite"><div class="wrap"><div class="card">
+  <h2>Built on the whole Kane suite</h2>
+  <h3>Not one command. All of it.</h3>
+  <div class="suite">
+    <div class="feat" data-step><code>run --agent</code><p>The live verification, its NDJSON parsed to a pass or fail.</p></div>
+    <div class="feat" data-step><code>testmd run</code><p>Committable _test.md flows, cached and replayed for free.</p></div>
+    <div class="feat" data-step><code>context + design</code><p>A PRD becomes acceptance criteria and scenarios.</p></div>
+    <div class="feat" data-step><code>testrun</code><p>Many tests, one sealed evidence pack, gating CI.</p></div>
+    <div class="feat" data-step><code>evidence</code><p>Screenshots and logs the agent fixes from.</p></div>
+    <div class="feat" data-step><code>balance · export · skill</code><p>Live credits, a Playwright export, an agent skill.</p></div>
+  </div>
+</div></div></section>
+
+<section id="proof"><div class="wrap"><div class="card">
+  <h2>Provenance</h2>
+  <h3>Everything here is real</h3>
+  <div class="stats">
+    <div class="stat" data-step><b>red to green</b><span>real self-heal, on camera</span></div>
+    <div class="stat" data-step><b>2 / 2</b><span>committable tests, sealed</span></div>
+    <div class="stat" data-step><b>11 ACs</b><span>designed from the PRD</span></div>
+    <div class="stat" data-step><b>MIT</b><span>open source</span></div>
+  </div>
+  <p class="muted" style="margin-top:16px">Live checkout: <a href="https://kane-loop-demo.pages.dev/">kane-loop-demo.pages.dev</a> · Source: <a href="https://github.com/zkasuran/kane-loop">github.com/zkasuran/kane-loop</a></p>
+</div></div></section>
+
+<div class="foot"><div class="wrap">
+  Built for the Kane CLI Online Hackathon (TestMu AI). Built with an AI coding agent; a human designed, reviewed and verified it. The self-heal shown is real and nothing is mocked.
+</div></div>
+
+<script>
+  window.setReveal = (k, scope) => {
+    const root = scope ? document.querySelector(scope) : document;
+    root.querySelectorAll('[data-step]').forEach((el, i) => { el.style.opacity = i < k ? '1' : '0'; });
+  };
+</script>
+</body>
+</html>
