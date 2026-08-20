@@ -20,10 +20,10 @@ export default {
   // stable NDJSON with a run_end event to script against.
   flows: [
     {
-      name: "convert-happy-path",
+      name: "checkout-total",
       url: "http://127.0.0.1:5178",
       objective:
-        "Go to http://127.0.0.1:5178, type 100 into the Amount field, choose Celsius as the From unit and Fahrenheit as the To unit, click Convert, store the shown result as 'result', and assert the result shows 212"
+        "Go to http://127.0.0.1:5178, set the Quantity field to 2, type SAVE25 into the Promo code field, click Apply, store the shown Total as 'total', and assert the Total shows $66.00"
     }
   ]
 };

@@ -1,61 +1,68 @@
 import { useState } from "react";
-import { convert, UNITS } from "./convert.js";
+import { priceOrder, money, UNIT_PRICE } from "./pricing.js";
+
+const PRODUCT = {
+  name: "Aurora Wireless Headphones",
+  blurb: "Active noise cancelling, 40 hour battery, USB-C fast charge."
+};
 
 export default function App() {
-  const [amount, setAmount] = useState("100");
-  const [from, setFrom] = useState("Celsius");
-  const [to, setTo] = useState("Fahrenheit");
-  const [result, setResult] = useState(null);
+  const [qty, setQty] = useState(1);
+  const [code, setCode] = useState("");
+  const [applied, setApplied] = useState(null);
+  const [placed, setPlaced] = useState(false);
 
-  const onConvert = () => {
-    const v = parseFloat(amount);
-    if (Number.isNaN(v)) {
-      setResult(null);
-      return;
-    }
-    setResult(convert(v, from, to));
+  const price = priceOrder(qty, applied);
+
+  const apply = () => {
+    setApplied(code.trim().toUpperCase() || null);
+    setPlaced(false);
   };
 
   return (
-    <main className="app">
-      <h1>Unit Converter</h1>
-      <p className="sub">Temperature, converted instantly.</p>
-
-      <div className="card">
-        <label htmlFor="amount">Amount</label>
+    <main className="checkout">
+      <section className="card product">
+        <div className="thumb" aria-hidden="true">🎧</div>
+        <h1>{PRODUCT.name}</h1>
+        <p className="blurb">{PRODUCT.blurb}</p>
+        <div className="unit">{money(UNIT_PRICE)}<span> each</span></div>
+        <label htmlFor="qty">Quantity</label>
         <input
-          id="amount"
+          id="qty"
           type="number"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          placeholder="Enter a value"
+          min="1"
+          max="9"
+          value={qty}
+          onChange={(e) => setQty(Math.max(1, Math.min(9, parseInt(e.target.value, 10) || 1)))}
         />
+      </section>
 
-        <div className="row">
-          <div className="field">
-            <label htmlFor="from">From</label>
-            <select id="from" value={from} onChange={(e) => setFrom(e.target.value)}>
-              {UNITS.map((u) => (
-                <option key={u} value={u}>{u}</option>
-              ))}
-            </select>
-          </div>
-          <div className="field">
-            <label htmlFor="to">To</label>
-            <select id="to" value={to} onChange={(e) => setTo(e.target.value)}>
-              {UNITS.map((u) => (
-                <option key={u} value={u}>{u}</option>
-              ))}
-            </select>
-          </div>
+      <section className="card summary">
+        <h2>Order summary</h2>
+        <div className="promo">
+          <input
+            id="promo"
+            aria-label="Promo code"
+            placeholder="Promo code"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+          />
+          <button type="button" onClick={apply}>Apply</button>
         </div>
+        {price.promo && (
+          <div className="chip" role="status">{price.promo.label} applied, saved {money(price.discount)}</div>
+        )}
 
-        <button type="button" onClick={onConvert}>Convert</button>
+        <dl className="lines">
+          <div><dt>Subtotal</dt><dd>{money(price.subtotal)}</dd></div>
+          <div><dt>Discount</dt><dd>-{money(price.discount)}</dd></div>
+          <div><dt>Tax</dt><dd>{money(price.tax)}</dd></div>
+          <div className="grand"><dt>Total</dt><dd><output id="total">{money(price.total)}</output></dd></div>
+        </dl>
 
-        <output className="result" aria-live="polite">
-          {result === null ? "—" : `${result} ${to}`}
-        </output>
-      </div>
+        <button className="pay" type="button" onClick={() => setPlaced(true)}>Complete purchase</button>
+        {placed && <p className="confirm" role="status">Order confirmed. {money(price.total)} charged.</p>}
+      </section>
     </main>
   );
 }

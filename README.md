@@ -21,7 +21,7 @@ re-fires Kane. The app heals itself until Kane is green, with no human in the mi
   OpenAI-compatible model, with every edit confined to your app.
 - **A live loop tape** at http://127.0.0.1:7799 showing every run: the Kane
   verdict, the failure reason, the agent's diff, the time to green.
-- **A demo app** (a real unit converter) with a Kane browser flow plus a unit
+- **A demo app** (a real checkout page) with a Kane browser flow plus a unit
   test, so you can watch the loop heal a regression end to end.
 
 ## The loop
@@ -46,8 +46,9 @@ npm run build:dashboard
 npm run loop              # watches demo/, serves the tape on :7799
 ```
 
-Open http://127.0.0.1:7799, then edit `demo/src/convert.js` and break the
-Celsius to Fahrenheit formula. Watch Kane catch it and the agent fix it.
+Open http://127.0.0.1:7799, then edit `demo/src/pricing.js` and break the
+discount math (add the discount instead of subtracting it). Watch Kane catch the
+wrong total and the agent fix it.
 
 <!-- MORE -->
 
@@ -67,8 +68,8 @@ Celsius to Fahrenheit formula. Watch Kane catch it and the agent fix it.
 kane-loop drives Kane in agent mode (`--agent --headless`), so every run is one
 NDJSON stream ending in a `run_end` event it scripts against: `status`, `reason`,
 `final_state`, `run_dir`, and the sealed `.evidence` pack. Flows are plain
-English ("type 100 into Amount, set From to Celsius and To to Fahrenheit, click
-Convert, assert the result shows 212"). No selectors, no framework.
+English ("set Quantity to 2, type SAVE25 into the promo field, click Apply,
+assert the Total shows $66.00"). No selectors, no framework.
 
 The attempt budget in the config caps how many times the agent may try before it
 stops and hands back to you, so a run can never loop forever or drain credits.
