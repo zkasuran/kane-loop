@@ -6,6 +6,7 @@ build/
 .kane.env
 *.log
 .testmuai/
+output-*/
 artifacts/
 .DS_Store
 coverage/

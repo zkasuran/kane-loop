@@ -18,6 +18,7 @@ export default {
   // Kane flows. Each is a plain-English objective Kane runs in a real browser.
   // Kept as objectives (not committed _test.md) so the core loop always gets
   // stable NDJSON with a run_end event to script against.
+  // Live self-heal flows: plain-English objectives run with `kane-cli run`.
   flows: [
     {
       name: "checkout-total",
@@ -25,5 +26,9 @@ export default {
       objective:
         "Go to http://127.0.0.1:5178, set the Quantity field to 2, type SAVE25 into the Promo code field, click Apply, store the shown Total as 'total', and assert the Total shows $66.00"
     }
-  ]
+  ],
+
+  // Committed _test.md flows for the pre-push hook and CI. First run authors and
+  // caches the plan; every later run replays from cache for free.
+  testmd: ["tests/flows/checkout_test.md"]
 };
