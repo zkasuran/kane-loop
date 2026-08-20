@@ -1,0 +1,23 @@
+{
+  "name": "kane-loop",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "A self-healing dev loop: on every save your coding agent and Kane CLI talk until the app is verified green.",
+  "workspaces": [
+    "loop",
+    "dashboard",
+    "demo"
+  ],
+  "scripts": {
+    "loop": "node loop/bin/kane-loop.mjs watch",
+    "build:dashboard": "npm --workspace dashboard run build",
+    "build:demo": "npm --workspace demo run build",
+    "dev:demo": "npm --workspace demo run dev",
+    "test": "node --test loop/test/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

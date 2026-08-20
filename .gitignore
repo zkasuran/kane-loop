@@ -1,0 +1,11 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+.kane.env
+*.log
+.testmuai/
+artifacts/
+.DS_Store
+coverage/
