@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
 import path from "node:path";
 import { emit, log } from "./events.mjs";
-import { runKaneFlow } from "./kane.mjs";
+import { runKaneFlow, getBalance } from "./kane.mjs";
 import { startWatcher } from "./watcher.mjs";
 import { startServer } from "./server.mjs";
 import { proposeFix } from "./agent.mjs";
@@ -42,6 +42,7 @@ export async function startLoop(cfg) {
 
   const up = await waitForUrl(cfg.demoUrl);
   log(up ? `demo live at ${cfg.demoUrl}` : `demo did not answer at ${cfg.demoUrl}`, up ? "info" : "warn");
+  getBalance().then((available) => emit("balance", { available }));
 
   let running = false;
   let queued = false;
@@ -110,6 +111,7 @@ export async function startLoop(cfg) {
       emit("error", { message: e.message });
     } finally {
       running = false;
+      getBalance().then((available) => emit("balance", { available }));
       if (queued) { queued = false; onChange([], "queued"); }
     }
   }

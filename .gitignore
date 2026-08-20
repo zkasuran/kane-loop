@@ -7,6 +7,8 @@ build/
 *.log
 .testmuai/
 output-*/
+.context/sessions/
+.context/locks/
 artifacts/
 .DS_Store
 coverage/

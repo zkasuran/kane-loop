@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"When promo code SAVE10 is applied, the discount equals 10% of the subtotal.","kind":"absolute","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"10% of subtotal"}}}

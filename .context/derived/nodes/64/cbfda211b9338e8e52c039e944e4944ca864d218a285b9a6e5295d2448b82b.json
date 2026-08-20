@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"When a promo discount is applied, the order summary shows the discount on its own line.","kind":"presence","risk":"high","derived":true,"expected_answer":{"operator":"exists","operand":"a separate discount line in the order summary"}}}

@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The selected quantity is no greater than 9.","kind":"bound","risk":"high","derived":true,"expected_answer":{"operator":"lte","operand":9}}}

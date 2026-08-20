@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The order total equals the discounted subtotal plus tax.","kind":"absolute","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"discounted subtotal + tax"}}}

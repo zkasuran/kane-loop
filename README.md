@@ -74,6 +74,24 @@ assert the Total shows $66.00"). No selectors, no framework.
 The attempt budget in the config caps how many times the agent may try before it
 stops and hands back to you, so a run can never loop forever or drain credits.
 
+## Kane CLI features used
+
+kane-loop leans on Kane's whole surface, not just one command:
+
+| Kane feature | Where kane-loop uses it |
+| --- | --- |
+| `run --agent` (NDJSON, `run_end`) | the live verification inside the loop |
+| `store as` to `final_state` | the agent reads the value Kane actually observed |
+| `testmd run` (committable `_test.md`, cached replay) | the committed regression suite, free to replay after the first run |
+| `context ingest` + `extract` + `design tests` | the PRD-to-tests assurance pipeline in `.context/` |
+| `.evidence` packs + `evidence serve` | the failure evidence the agent fixes from, openable from the tape |
+| `--headless`, exit codes, `--mode`, `--variables` | headless CI runs and parameterized flows |
+| `testmd export` | a standalone Playwright (Python) export of a flow |
+| pre-push hook + GitHub Actions | verification baked into the workflow |
+
+Mobile testing (Android emulator, iOS simulator) is macOS only, so it is out of
+scope on this Linux build.
+
 ## Built with AI, on purpose
 
 This project is about an AI agent verifying its own work, so it was built that

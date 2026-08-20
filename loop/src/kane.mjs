@@ -79,3 +79,18 @@ function parseEvidencePath(stderr) {
   const m = stderr.match(/evidence serve\s+(\S+\.evidence)/);
   return m ? m[1] : null;
 }
+
+/** Read remaining Kane credits (`kane-cli balance`). Returns a number or null. */
+export function getBalance() {
+  return new Promise((resolve) => {
+    const child = spawn("kane-cli", ["balance"], { env: process.env });
+    let out = "";
+    child.stdout.on("data", (d) => (out += d.toString()));
+    child.stderr.on("data", (d) => (out += d.toString()));
+    child.on("error", () => resolve(null));
+    child.on("close", () => {
+      const m = out.match(/Available credits:\s*([0-9,]+)/i);
+      resolve(m ? Number(m[1].replace(/,/g, "")) : null);
+    });
+  });
+}

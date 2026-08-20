@@ -1,0 +1,22 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  kane:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Install Kane CLI
+        run: npm install -g @testmuai/kane-cli
+      - name: Kane login
+        run: kane-cli login --username "${{ secrets.KANE_USERNAME }}" --access-key "${{ secrets.KANE_ACCESS_KEY }}"
+      - name: Verify the app in a real browser
+        # Replays the committed _test.md flows headless; non-zero exit fails the build.
+        run: npm run verify

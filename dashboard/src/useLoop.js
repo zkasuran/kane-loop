@@ -10,6 +10,7 @@ export function useLoop() {
   const [logs, setLogs] = useState([]);
   const [config, setConfig] = useState(null);
   const [connected, setConnected] = useState(false);
+  const [balance, setBalance] = useState(null);
   const runsRef = useRef(new Map());
 
   useEffect(() => {
@@ -43,6 +44,9 @@ export function useLoop() {
         case "log":
           setLogs((l) => [...l.slice(-99), evt]);
           return;
+        case "balance":
+          setBalance(evt.available);
+          return;
         default:
           return;
       }
@@ -59,5 +63,5 @@ export function useLoop() {
     return () => es.close();
   }, []);
 
-  return { runs, logs, config, connected };
+  return { runs, logs, config, connected, balance };
 }

@@ -12,6 +12,7 @@
   "scripts": {
     "loop": "node loop/bin/kane-loop.mjs watch",
     "verify": "node loop/bin/kane-loop.mjs verify",
+    "export:code": "kane-cli testmd export tests/flows/checkout_test.md --language py",
     "hook:install": "cp hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push && echo 'installed .git/hooks/pre-push'",
     "build:dashboard": "npm --workspace dashboard run build",
     "build:demo": "npm --workspace demo run build",

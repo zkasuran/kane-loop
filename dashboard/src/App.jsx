@@ -6,7 +6,7 @@ import { statusMeta, StatTile, StatusPill, LoopTape, DiffView } from "./componen
 const secs = (ms) => (ms == null ? "—" : `${(ms / 1000).toFixed(1)}s`);
 
 export default function App() {
-  const { runs, config, connected } = useLoop();
+  const { runs, config, connected, balance } = useLoop();
   const [pinned, setPinned] = useState(null);
 
   const latest = runs[runs.length - 1] || null;
@@ -69,7 +69,7 @@ export default function App() {
         <StatTile label="Verified green" value={stats.greens} />
         <StatTile label="Auto-fixes" value={stats.fixes} />
         <StatTile label="Last run" value={secs(latest?.elapsedMs)} />
-        {stats.credits > 0 && <StatTile label="Kane credits" value={stats.credits} />}
+        {balance != null && <StatTile label="Kane credits left" value={balance.toLocaleString()} />}
       </section>
 
       <section className="tape-wrap">
@@ -114,7 +114,7 @@ function Detail({ run }) {
         </div>
       ) : null}
 
-      {k?.evidence && <div className="evidence">evidence: <code>{k.evidence}</code></div>}
+      {k?.evidence && <div className="evidence">evidence: <code>kane-cli evidence serve {k.evidence}</code></div>}
     </motion.section>
   );
 }

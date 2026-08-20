@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The purchase confirmation total equals the final checkout total at purchase completion.","kind":"propagation","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"final checkout total at purchase completion"}}}

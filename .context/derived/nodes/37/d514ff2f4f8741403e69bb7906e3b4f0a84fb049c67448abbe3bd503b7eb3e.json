@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"The subtotal equals the unit price multiplied by the selected quantity.","kind":"absolute","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"unit price × selected quantity"}}}

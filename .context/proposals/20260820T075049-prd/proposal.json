@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "read_basis": "sha256:6b3080545e837769fecd6f980af26a436784d2ac7313fdef5ccd50f9f3a07fd4",
+  "source": {
+    "source_id": "prd",
+    "source_cid": "sha256:34a5c18f427a16d0aaebd65e079bc7bafa3571abacca2b64911926b04b9d0a02"
+  },
+  "use_cases": [
+    {
+      "temp_ref": "n1",
+      "title": "Complete a single-product purchase",
+      "description": "A customer purchases the Aurora Wireless Headphones through a single-product checkout by selecting a quantity between 1 and 9, optionally applying a supported promo code or an unknown code that yields no discount, reviewing a live order summary that shows subtotal, discount, tax, and total, and completing the purchase to receive a confirmation showing the exact amount charged.",
+      "summary": "Buy Aurora headphones with quantity, promo, live totals, and confirmation.",
+      "actors": [
+        "customer"
+      ],
+      "value": "Enables revenue-generating checkout with transparent pricing and an exact purchase confirmation.",
+      "risk": "high",
+      "cite": {
+        "anchor": "L4-L6",
+        "quote": "A single-product checkout for the Aurora Wireless Headphones ($40 each). The\ncustomer picks a quantity, optionally applies a promo code, and sees a live\norder summary before completing the purchase."
+      },
+      "cites": [
+        {
+          "anchor": "L4-L6",
+          "quote": "A single-product checkout for the Aurora Wireless Headphones ($40 each). The\ncustomer picks a quantity, optionally applies a promo code, and sees a live\norder summary before completing the purchase."
+        },
+        {
+          "anchor": "L11-L12",
+          "quote": "The customer can set a quantity from 1 to 9. The subtotal is the unit price\ntimes the quantity."
+        },
+        {
+          "anchor": "L15-L16",
+          "quote": "SAVE10 takes 10% off the subtotal; SAVE25 takes 25% off. An unknown code applies\nno discount. The discount shows on its own line in the summary."
+        },
+        {
+          "anchor": "L19-L21",
+          "quote": "Tax is 10%, charged on the discounted subtotal. The total is the discounted\nsubtotal plus tax. Worked example: 2 units with SAVE25 is 80 minus 20 plus 6 tax\nequals $66.00."
+        },
+        {
+          "anchor": "L24-L24",
+          "quote": "Completing the purchase shows a confirmation with the exact total charged."
+        }
+      ],
+      "criteria": [
+        {
+          "text": "Unit price is $40 for the Aurora Wireless Headphones.",
+          "cite": {
+            "anchor": "L4-L4",
+            "quote": "A single-product checkout for the Aurora Wireless Headphones ($40 each). The"
+          }
+        },
+        {
+          "text": "Quantity can be set from 1 to 9.",
+          "cite": {
+            "anchor": "L11-L11",
+            "quote": "The customer can set a quantity from 1 to 9."
+          }
+        },
+        {
+          "text": "Subtotal equals unit price multiplied by quantity.",
+          "cite": {
+            "anchor": "L11-L12",
+            "quote": "The subtotal is the unit price\ntimes the quantity."
+          }
+        },
+        {
+          "text": "Promo codes SAVE10 and SAVE25 reduce the subtotal by 10% and 25%; an unknown code applies no discount.",
+          "cite": {
+            "anchor": "L15-L16",
+            "quote": "SAVE10 takes 10% off the subtotal; SAVE25 takes 25% off. An unknown code applies\nno discount."
+          }
+        },
+        {
+          "text": "The discount appears on its own line in the summary.",
+          "cite": {
+            "anchor": "L16-L16",
+            "quote": "The discount shows on its own line in the summary."
+          }
+        },
+        {
+          "text": "Tax is 10% of the discounted subtotal, and total equals discounted subtotal plus tax.",
+          "cite": {
+            "anchor": "L19-L20",
+            "quote": "Tax is 10%, charged on the discounted subtotal. The total is the discounted\nsubtotal plus tax."
+          }
+        },
+        {
+          "text": "For 2 units with SAVE25, the total is $66.00 after subtracting $20 and adding $6 tax.",
+          "cite": {
+            "anchor": "L20-L21",
+            "quote": "Worked example: 2 units with SAVE25 is 80 minus 20 plus 6 tax\nequals $66.00."
+          }
+        },
+        {
+          "text": "Completing the purchase shows a confirmation with the exact total charged.",
+          "cite": {
+            "anchor": "L24-L24",
+            "quote": "Completing the purchase shows a confirmation with the exact total charged."
+          }
+        }
+      ],
+      "depends_on_hint": []
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"label":"ac","content":{"text":"When an unsupported promo code is applied, the discounted subtotal equals the subtotal.","kind":"absolute","risk":"high","derived":true,"expected_answer":{"operator":"equals","operand":"subtotal"}}}

@@ -1,0 +1,13 @@
+[
+  {
+    "id": "n1",
+    "kind": "review-item",
+    "resolution": "skipped",
+    "edit": null,
+    "reason": null,
+    "by": {
+      "kind": "human",
+      "id": "owner"
+    }
+  }
+]
