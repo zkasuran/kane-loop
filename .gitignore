@@ -12,3 +12,6 @@ output-*/
 artifacts/
 .DS_Store
 coverage/
+DEMO-*.mp4
+upload-*/
+artifacts/

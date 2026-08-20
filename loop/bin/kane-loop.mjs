@@ -21,17 +21,17 @@ function printer(evt) {
       );
       break;
     case "agent_start":
-      console.log(`  🤖 agent fixing (attempt ${evt.iter}/${evt.of})`);
+      console.log(`  > agent fixing (attempt ${evt.iter}/${evt.of})`);
       break;
     case "agent_error":
-      console.log(`  ✖ agent error: ${evt.message}`);
+      console.log(`  x agent error: ${evt.message}`);
       break;
     case "iteration":
-      if (evt.status === "green") console.log(`  ✅ GREEN in run #${evt.id}`);
-      else if (evt.status === "stuck") console.log(`  ⚠ stuck after ${evt.iter} attempts`);
+      if (evt.status === "green") console.log(`  * GREEN in run #${evt.id}`);
+      else if (evt.status === "stuck") console.log(`  ! stuck after ${evt.iter} attempts`);
       else if (evt.patch)
         console.log(
-          `  ✎ patched: ${evt.patch.summary} (${evt.patch.files.map((f) => f.path).join(", ")})`
+          `  + patched: ${evt.patch.summary} (${evt.patch.files.map((f) => f.path).join(", ")})`
         );
       break;
   }
